@@ -1,6 +1,6 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const prompt = require("prompt-sync")();
-console.log('IMEI DEVICE CHECKER ')
+console.log('\nIMEI DEVICE CHECKER\n')
 
 
 const getImei = async () => {
@@ -19,8 +19,7 @@ const getImei = async () => {
         const response = await fetch(url, dataAPI);
         const result = await response.json();
 
-        // return result.model.device
-        return result.model.device
+        return result
         // console.log(result)
     } catch (error) {
         console.error(error);
@@ -33,7 +32,10 @@ const getImei = async () => {
 (async () => {
 
     let dataImei = await getImei()
-
-    console.log('Device : ' + dataImei)
-
+    console.log('\n=======================================\n')
+    console.log('Imei Number : ' + dataImei.imei)
+    console.log('Device      : ' + dataImei.model.device)
+    console.log('Brand       : ' + dataImei.model.brand)
+    console.log('Model       : ' + dataImei.model.model_nb)
+    console.log('\n=======================================\n')
 })()
